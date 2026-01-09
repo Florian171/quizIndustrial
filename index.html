@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Industrial Systems - Unimi Clone</title>
+    <title>Quiz Industrial Systems - Advanced</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
@@ -14,7 +14,7 @@
             padding-bottom: 60px;
         }
 
-/* --- STILI NAVBAR SCROLLABILE (MODIFICATO PER GRIGLIA VERTICALE) --- */
+        /* --- STILI NAVBAR SCROLLABILE (GRIGLIA VERTICALE) --- */
         .scroller-container {
             background: white;
             border: 1px solid #dee2e6;
@@ -22,26 +22,22 @@
             padding: 10px;
             margin-bottom: 20px;
             
-            /* MODIFICA: Usa Flexbox con a capo automatico */
+            /* MODIFICA: Flexbox con a capo automatico */
             display: flex;
             flex-wrap: wrap;
-            gap: 6px; /* Spazio tra i pulsanti */
+            gap: 6px; 
             
-            /* Imposta altezza massima per circa 3 righe e abilita scroll verticale */
+            /* Altezza fissa per circa 3 righe e scroll verticale */
             max-height: 160px; 
             overflow-y: auto; 
-            
-            /* Scrollbar sottile */
             scrollbar-width: thin; 
         }
 
         .q-btn {
-            /* Dimensioni fisse per il bottone */
-            width: 34px; 
-            height: 34px;
-            line-height: 35px;
+            width: 38px; 
+            height: 38px;
+            line-height: 36px;
             text-align: center;
-            
             border: 1px solid #dee2e6;
             background-color: #fff;
             color: #495057;
@@ -58,41 +54,16 @@
         /* Colori stato domanda */
         .q-btn.is-correct { background-color: #198754; color: white; border-color: #198754; }
         .q-btn.is-wrong { background-color: #dc3545; color: white; border-color: #dc3545; }
-        .q-btn.is-saved { border: 2px solid #ffc107 !important; 
-        }
-
-        .q-btn {
-            display: inline-block;
-            width: 38px;
-            height: 38px;
-            line-height: 36px; /* Centra verticalmente */
-            text-align: center;
-            margin-right: 4px;
-            border: 1px solid #dee2e6;
-            background-color: #fff;
-            color: #495057;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            user-select: none;
-        }
-
-        .q-btn:hover { background-color: #e9ecef; }
-        .q-btn.active { border-color: #0d6efd; background-color: #e7f1ff; color: #0d6efd; font-weight: bold; }
-        
-        /* Colori stato domanda nella navbar */
-        .q-btn.is-correct { background-color: #198754; color: white; border-color: #198754; }
-        .q-btn.is-wrong { background-color: #dc3545; color: white; border-color: #dc3545; }
         .q-btn.is-saved { border: 2px solid #ffc107 !important; }
 
-        /* --- STILI CARD DOMANDA --- */
+        /* --- CARD DOMANDA --- */
         .question-card {
             border: 1px solid #dee2e6;
             border-radius: 0.375rem;
             background: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             margin-bottom: 20px;
+            min-height: 300px;
         }
 
         .card-header-custom {
@@ -117,10 +88,10 @@
             line-height: 1.5;
         }
 
-        /* --- OPZIONI DI RISPOSTA --- */
+        /* --- OPZIONI --- */
         .option-item {
             display: flex;
-            align-items: flex-start; /* Allinea in alto se testo lungo */
+            align-items: flex-start;
             padding: 12px 15px;
             margin-bottom: 10px;
             border: 1px solid #ced4da;
@@ -132,9 +103,8 @@
 
         .option-item:hover { background-color: #f8f9fa; }
         
-        /* Input radio nascosto visivamente ma accessibile */
         .option-item input[type="radio"] {
-            margin-top: 5px; /* Allinea col testo */
+            margin-top: 5px;
             margin-right: 12px;
             transform: scale(1.2);
             cursor: pointer;
@@ -146,13 +116,12 @@
             width: 100%;
         }
 
-        /* Feedback colori */
         .option-item.correct-bg { background-color: #d1e7dd; border-color: #198754; color: #0f5132; }
         .option-item.wrong-bg { background-color: #f8d7da; border-color: #dc3545; color: #842029; }
 
-        /* --- BOX NOTA SCIENTIFICA (Giallo) --- */
+        /* --- NOTA SCIENTIFICA --- */
         .scientific-note {
-            display: none; /* Nascosto di default */
+            display: none;
             margin-top: 20px;
             padding: 15px;
             background-color: #fff3cd;
@@ -161,9 +130,28 @@
             border-radius: 4px;
             font-size: 0.95rem;
         }
-        .scientific-note strong { color: #856404; }
 
-        /* --- TOOLBAR IN ALTO --- */
+        /* --- RISULTATI FINALI --- */
+        .results-overlay {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #0d6efd;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        /* --- TOOLBAR --- */
         .toolbar-container {
             background: white;
             border: 1px solid #dee2e6;
@@ -200,15 +188,9 @@
             font-size: 0.9rem;
         }
 
-        /* Bottoni speciali */
-        .btn-check {
-            background-color: #6c757d; 
-            color: white;
-            border: none;
-        }
+        .btn-check { background-color: #6c757d; color: white; border: none; }
         .btn-check:hover { background-color: #5c636a; color: white; }
 
-        /* Icona Salva */
         .save-btn {
             background: none;
             border: 1px solid #dee2e6;
@@ -230,17 +212,17 @@
     <div class="toolbar-container">
         <div class="toolbar-row">
             <div class="toolbar-group">
-                <div class="toolbar-label">SELEZIONA DATASET</div>
+                <div class="toolbar-label">DATASET</div>
                 <select class="form-select" id="dataset-select" disabled>
                     <option selected>Industrial Systems (Verbatim PDF)</option>
                 </select>
             </div>
             <div class="toolbar-group">
-                <div class="toolbar-label">SELEZIONA SET</div>
+                <div class="toolbar-label">MODALITÀ / FILTRO</div>
                 <select class="form-select" id="filter-select" onchange="applyFilter()">
-                    <option value="all">Tutti i quiz</option>
+                    <option value="all">Tutti i quiz (138)</option>
                     <option value="saved">⭐ Quiz Salvati</option>
-                    <option value="errors">🗑️ Quiz Sbagliati</option>
+                    <option value="errors">🗑️ Quiz Sbagliati (Ripasso)</option>
                 </select>
             </div>
             <div class="toolbar-group" style="flex:0 0 auto; display:flex; gap:10px;">
@@ -251,7 +233,7 @@
                     <i class="fas fa-trash"></i> Sbagliati
                 </button>
                 <button class="btn btn-primary" onclick="restartQuiz()">
-                    <i class="fas fa-play"></i> Inizia
+                    <i class="fas fa-sync"></i> Riavvia
                 </button>
             </div>
         </div>
@@ -267,7 +249,7 @@
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="check-instant" onchange="toggleInstant()">
-                <label class="form-check-label" for="check-instant">Evidenzia risposta (Instant Check)</label>
+                <label class="form-check-label" for="check-instant">Instant Check</label>
             </div>
         </div>
     </div>
@@ -287,21 +269,37 @@
         </div>
         
         <div class="card-body-custom">
-            <div class="question-text" id="q-text">
-                Caricamento...
-            </div>
-
-            <div id="options-container">
+            <div id="quiz-view">
+                <div class="question-text" id="q-text">
+                    Caricamento...
                 </div>
 
-            <div id="scientific-note" class="scientific-note">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                <span id="note-text"></span>
+                <div id="options-container">
+                    </div>
+
+                <div id="scientific-note" class="scientific-note">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <span id="note-text"></span>
+                </div>
+            </div>
+
+            <div id="results-view" class="results-overlay">
+                <h3>Quiz Completato!</h3>
+                <div class="score-circle" id="score-circle">0%</div>
+                <p id="score-details" class="lead mb-4"></p>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> Le domande sbagliate sono state aggiunte al set "Sbagliati".<br>
+                    Quelle a cui hai risposto correttamente sono state rimosse dagli errori.
+                </div>
+                <div class="d-flex justify-content-center gap-3">
+                    <button class="btn btn-outline-primary" onclick="restartQuiz()">Ricomincia stesso set</button>
+                    <button class="btn btn-danger" onclick="setFilter('errors')">Vai agli Errori</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center" id="footer-controls">
         <div class="d-flex gap-2">
             <button class="btn btn-secondary" onclick="prevQ()">Indietro</button>
             <button class="save-btn" id="btn-save" onclick="toggleSave()" title="Salva nei preferiti">
@@ -311,16 +309,14 @@
         
         <div class="d-flex gap-2">
             <button class="btn btn-check" onclick="checkAnswer()">Check</button>
-            <button class="btn btn-primary px-4" onclick="nextQ()">Avanti</button>
+            <button class="btn btn-primary px-4" id="btn-next" onclick="nextQ()">Avanti</button>
         </div>
     </div>
 
 </div>
 
 <script>
-/* --- DATASET VERBATIM --- 
-   Nota: 'note' contiene le precisazioni scientifiche richieste.
-*/
+/* --- DATASET VERBATIM --- */
 const fullDatabase = [
   {id:1,c:"Fondamenti",q:"Nowadays, the usage of classical feature extraction and data analysis methods is outdated since the capability of the recent deep learning models and methods made them obsolete and not more present in the common practice",o:["True","False"],a:1,note:""},
   {id:2,c:"Fondamenti",q:"Artificial Intelligence can be applied to the following sectors",o:["Robotics","Information Extraction","All the above"],a:2},
@@ -474,7 +470,7 @@ const KEY_ERRORS = 'quiz_ind_errors';
 let savedIDs = JSON.parse(localStorage.getItem(KEY_SAVED)) || [];
 let errorIDs = JSON.parse(localStorage.getItem(KEY_ERRORS)) || [];
 
-/* --- FUNZIONI PRINCIPALI --- */
+/* --- FUNZIONI --- */
 
 function init() {
     applyFilter();
@@ -483,6 +479,11 @@ function init() {
 function applyFilter() {
     const filter = document.getElementById('filter-select').value;
     const isRandom = document.getElementById('check-random').checked;
+    
+    // Nascondi view risultati, mostra quiz
+    document.getElementById('quiz-view').style.display = 'block';
+    document.getElementById('results-view').style.display = 'none';
+    document.getElementById('footer-controls').style.display = 'flex';
 
     let subset = [];
 
@@ -506,10 +507,8 @@ function applyFilter() {
     currentQueue = subset;
     currentIndex = 0;
     
-    // Reset stato sessione (opzionale: potremmo volerlo mantenere)
-    // Per ora manteniamo le risposte date se l'ID corrisponde
-    
     renderScroller();
+    
     if (currentQueue.length > 0) {
         loadQuestion(0);
     } else {
@@ -541,12 +540,9 @@ function renderScroller() {
         btn.innerText = idx + 1;
         btn.onclick = () => loadQuestion(idx);
         btn.id = `nav-btn-${idx}`;
-        
-        // Colora se salvato
         if (savedIDs.includes(q.id)) {
             btn.classList.add('is-saved');
         }
-        
         container.appendChild(btn);
     });
 }
@@ -556,13 +552,13 @@ function loadQuestion(index) {
     currentIndex = index;
     const q = currentQueue[currentIndex];
 
-    // Aggiorna UI Navbar
+    // Navbar Update
     document.getElementById('idx-display').innerText = index + 1;
     document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('active'));
     const currBtn = document.getElementById(`nav-btn-${index}`);
     if(currBtn) currBtn.classList.add('active');
 
-    // Dati Domanda
+    // UI Domanda
     document.getElementById('q-id-display').innerText = q.id;
     document.getElementById('cat-badge').innerText = q.c.toUpperCase();
     document.getElementById('q-text').innerText = q.q;
@@ -590,20 +586,33 @@ function loadQuestion(index) {
         optContainer.appendChild(div);
     });
 
-    // Reset nota e colori
+    // Reset Note
     document.getElementById('scientific-note').style.display = 'none';
     updateSaveIcon();
 
-    // Se già risposta, colora
+    // Colora se già risposto
     if (qStatus[q.id]) {
         showFeedback(q.id);
+    }
+    
+    // Tasto Avanti vs Consegna
+    const btnNext = document.getElementById('btn-next');
+    if (index === currentQueue.length - 1) {
+        btnNext.innerHTML = 'Consegna <i class="fas fa-check-circle ms-1"></i>';
+        btnNext.className = 'btn btn-success px-4';
+        btnNext.onclick = finishQuiz;
+    } else {
+        btnNext.innerHTML = 'Avanti';
+        btnNext.className = 'btn btn-primary px-4';
+        btnNext.onclick = nextQ;
     }
 }
 
 function selectOption(qId, optIndex) {
     userAnswers[qId] = optIndex;
-    // Aggiorna UI radio
-    loadQuestion(currentIndex); // Ricarica veloce per aggiornare il checked visivo
+    // Visivo
+    const radios = document.getElementsByName('q-opt');
+    if(radios[optIndex]) radios[optIndex].checked = true;
     
     if (document.getElementById('check-instant').checked) {
         checkAnswer();
@@ -619,14 +628,15 @@ function checkAnswer() {
     
     qStatus[q.id] = isCorrect ? 'correct' : 'wrong';
 
-    // Gestione Errori Storage
+    // *** LOGICA AGGIUNTA/RIMOZIONE ERRORI ***
     if (!isCorrect) {
+        // Se sbagliato, aggiungi agli errori (se non presente)
         if (!errorIDs.includes(q.id)) {
             errorIDs.push(q.id);
             localStorage.setItem(KEY_ERRORS, JSON.stringify(errorIDs));
         }
     } else {
-        // Se corretta ora, rimuovi dagli errori? (Opzionale, Unimi standard non lo fa subito)
+        // Se corretto, RIMUOVI dagli errori (se presente)
         if (errorIDs.includes(q.id)) {
             errorIDs = errorIDs.filter(id => id !== q.id);
             localStorage.setItem(KEY_ERRORS, JSON.stringify(errorIDs));
@@ -636,11 +646,9 @@ function checkAnswer() {
     showFeedback(q.id);
     updateScrollerStatus(currentIndex, isCorrect);
     
-    // Mostra nota se esiste
     if (q.note && q.note.trim() !== "") {
-        const noteBox = document.getElementById('scientific-note');
         document.getElementById('note-text').innerHTML = "<strong>Nota Scientifica:</strong> " + q.note;
-        noteBox.style.display = 'block';
+        document.getElementById('scientific-note').style.display = 'block';
     }
 }
 
@@ -652,10 +660,10 @@ function showFeedback(qId) {
     opts.forEach((div, i) => {
         div.classList.remove('correct-bg', 'wrong-bg');
         if (i === q.a) {
-            div.classList.add('correct-bg'); // Verde su quella giusta
+            div.classList.add('correct-bg'); 
         }
         if (userAnswers[qId] === i && i !== q.a) {
-            div.classList.add('wrong-bg'); // Rosso su quella sbagliata selezionata
+            div.classList.add('wrong-bg'); 
         }
     });
 }
@@ -679,10 +687,8 @@ function toggleSave() {
         savedIDs.splice(idx, 1);
     }
     localStorage.setItem(KEY_SAVED, JSON.stringify(savedIDs));
-    
     updateSaveIcon();
     
-    // Aggiorna bordo giallo nello scroller
     const btn = document.getElementById(`nav-btn-${currentIndex}`);
     if (btn) btn.classList.toggle('is-saved');
 }
@@ -707,8 +713,41 @@ function prevQ() {
     if (currentIndex > 0) loadQuestion(currentIndex - 1);
 }
 
+function finishQuiz() {
+    // Calcola Risultati
+    let correctCount = 0;
+    let answeredCount = 0;
+    
+    currentQueue.forEach(q => {
+        if (qStatus[q.id]) {
+            answeredCount++;
+            if(qStatus[q.id] === 'correct') correctCount++;
+        }
+    });
+
+    const total = currentQueue.length;
+    const percentage = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+
+    // Aggiorna UI
+    document.getElementById('quiz-view').style.display = 'none';
+    document.getElementById('footer-controls').style.display = 'none';
+    const resView = document.getElementById('results-view');
+    resView.style.display = 'block';
+
+    const circle = document.getElementById('score-circle');
+    circle.innerText = `${percentage}%`;
+    
+    // Colore cerchio
+    if(percentage >= 80) circle.style.background = '#198754'; // Verde
+    else if(percentage >= 60) circle.style.background = '#ffc107'; // Giallo
+    else circle.style.background = '#dc3545'; // Rosso
+
+    document.getElementById('score-details').innerText = 
+        `Hai risposto correttamente a ${correctCount} domande su ${total}.`;
+}
+
 function toggleInstant() {
-    // Ricarica per applicare logica se necessario
+    // Logica opzionale per ricalcolo immediato
 }
 
 function shuffle(array) {
